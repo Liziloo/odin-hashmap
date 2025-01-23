@@ -72,6 +72,7 @@ class HashMap {
         if (requestedList) {
             return requestedList.remove(key);
         }
+        return false
     }
 
     length() {
@@ -149,4 +150,6 @@ test.set('moon', 'silver')
 test.set('moon', 'yellow');
 test.set('kite', 'aqua');
 
-console.log(test.has('cheese'));
+console.log(test.remove('moon'));
+console.log(test.entries());
+console.log(test.length());

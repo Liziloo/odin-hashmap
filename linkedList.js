@@ -106,6 +106,7 @@ class LinkedList {
     }
 
     entries() {
+        if (!this.head) {return []}
         const theseEntries = [];
         let pointer = this.head;
         theseEntries.push([pointer.key, pointer.value]);
