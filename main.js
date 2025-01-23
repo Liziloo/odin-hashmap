@@ -92,6 +92,17 @@ class HashMap {
         }
         return allValues;
     }
+
+    entries() {
+        const allEntries = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            const currentList = this.buckets[i];
+            if (currentList) {
+                allEntries.push(...currentList.entries());
+            }
+        }
+        return allEntries;
+    }
 }
 
 const newHash = new HashMap();
@@ -103,4 +114,4 @@ newHash.set('Oak', 'boy');
 newHash.set('Finnick', 'boy');
 
 
-console.log(newHash.values());
+console.log(newHash.entries());
