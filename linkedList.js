@@ -6,8 +6,9 @@ class LinkedList {
         this.tail = null;
     }
 
-    append(value) {
+    append(key, value) {
         const newNode = new Node();
+        newNode.key = key;
         newNode.value = value;
         if (this.tail) {
             this.tail.nextNode = newNode;
@@ -17,8 +18,9 @@ class LinkedList {
         this.tail = newNode;
     }
 
-    prepend(value) {
+    prepend(key, value) {
         const newNode = new Node();
+        newNode.key = key;
         newNode.value = value;
         if (this.head) {
             newNode.nextNode = this.head;
@@ -58,28 +60,27 @@ class LinkedList {
         this.tail = pointer;
     }
 
-    contains(value) {
+    contains(key) {
         let pointer = this.head;
-        if (pointer.value === value) {return true};
+        if (pointer.key === key) {return true};
         while (pointer.nextNode) {
             pointer = pointer.nextNode;
-            if (pointer.value === value) {return true};
+            if (pointer.key === key) {return true};
         }
         return false;
     }
 
-    find(value) {
+    find(key) {
         let pointer = this.head;
-        let i;
-        for (i = 0; i < value; i++) {
-            while (pointer.nextNode) {
-                if (pointer.value === value) {
-                    return i;
-                }
-                pointer = pointer.nextNode;
+        while (pointer.nextNode) {
+            if (pointer.key === key) {
+                return pointer.value;
             }
+            pointer = pointer.nextNode;
         }
-        if (pointer.value === value) {return i};
+        
+        if (pointer.key === key) {return pointer.value};
+        return null;
     }
 
     toString() {
@@ -89,16 +90,17 @@ class LinkedList {
             printString += `( ${pointer.value } ) => `
             pointer = pointer.nextNode;
         }
-        printString += `( ${pointer.value} ) => null`;
+        printString += `( ${pointer.key} : ${pointer.value} ) => null`;
         return printString
     }
 
-    insertAt(value, index) {
+    insertAt(key, value, index) {
         if (index === 0) {
-            this.prepend(value);
+            this.prepend(key, value);
             return
         }
         const newNode = new Node();
+        newNode.key = key;
         newNode.value = value;
         let pointer = this.head;
         let toPrecede;
@@ -131,6 +133,7 @@ class LinkedList {
 
 class Node {
     constructor() {
+        this.key = null;
         this.value = null;
         this.nextNode = null;
     }
