@@ -94,6 +94,17 @@ class LinkedList {
         return theseKeys;
     }
 
+    values() {
+        const theseValues = [];
+        let pointer = this.head;
+        theseValues.push(pointer.value);
+        while (pointer.nextNode) {
+            pointer = pointer.nextNode;
+            theseValues.push(pointer.value);
+        }
+        return theseValues;
+    }
+
     insertAt(key, value, index) {
         if (index === 0) {
             this.prepend(key, value);

@@ -74,12 +74,23 @@ class HashMap {
     keys() {
         const allKeys = [];
         for (let i = 0; i < this.buckets.length; i++) {
-            const currentNode = this.buckets[i];
-            if (currentNode) {
-                allKeys.push(...currentNode.keys());
+            const currentList = this.buckets[i];
+            if (currentList) {
+                allKeys.push(...currentList.keys());
             }
         }
         return allKeys;
+    }
+
+    values() {
+        const allValues = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            const currentList = this.buckets[i];
+            if (currentList) {
+                allValues.push(...currentList.values());
+            }
+        }
+        return allValues;
     }
 }
 
@@ -92,4 +103,4 @@ newHash.set('Oak', 'boy');
 newHash.set('Finnick', 'boy');
 
 
-console.log(newHash.keys());
+console.log(newHash.values());
