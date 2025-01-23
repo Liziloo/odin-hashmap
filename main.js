@@ -20,7 +20,6 @@ class HashMap {
 
     set(key, value) {
         const hashValue = this.hash(key);
-        console.log('hash', hashValue);
         if (hashValue < 0 || hashValue >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
           }
@@ -71,6 +70,17 @@ class HashMap {
     clear() {
         this.buckets = [];
     }
+
+    keys() {
+        const allKeys = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            const currentNode = this.buckets[i];
+            if (currentNode) {
+                allKeys.push(currentNode.keys());
+            }
+        }
+        return allKeys;
+    }
 }
 
 const newHash = new HashMap();
@@ -80,6 +90,5 @@ newHash.set('me', 'girl');
 newHash.set('Hans', 'boy');
 newHash.set('Oak', 'boy');
 
-newHash.clear();
 
-console.log(newHash);
+console.log(newHash.keys());

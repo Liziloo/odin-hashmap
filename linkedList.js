@@ -83,15 +83,15 @@ class LinkedList {
         return null;
     }
 
-    toString() {
+    keys() {
+        const theseKeys = [];
         let pointer = this.head;
-        let printString = '';
+        theseKeys.push(pointer.key);
         while (pointer.nextNode) {
-            printString += `( ${pointer.value } ) => `
             pointer = pointer.nextNode;
+            theseKeys.push(pointer.key);
         }
-        printString += `( ${pointer.key} : ${pointer.value} ) => null`;
-        return printString
+        return theseKeys;
     }
 
     insertAt(key, value, index) {
