@@ -76,7 +76,7 @@ class HashMap {
         for (let i = 0; i < this.buckets.length; i++) {
             const currentNode = this.buckets[i];
             if (currentNode) {
-                allKeys.push(currentNode.keys());
+                allKeys.push(...currentNode.keys());
             }
         }
         return allKeys;
@@ -89,6 +89,7 @@ newHash.loadFactor = 0.75;
 newHash.set('me', 'girl');
 newHash.set('Hans', 'boy');
 newHash.set('Oak', 'boy');
+newHash.set('Finnick', 'boy');
 
 
 console.log(newHash.keys());
