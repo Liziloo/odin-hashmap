@@ -67,6 +67,10 @@ class HashMap {
         }
         return counter;
     }
+
+    clear() {
+        this.buckets = [];
+    }
 }
 
 const newHash = new HashMap();
@@ -76,6 +80,6 @@ newHash.set('me', 'girl');
 newHash.set('Hans', 'boy');
 newHash.set('Oak', 'boy');
 
-console.log(newHash.length());
+newHash.clear();
 
 console.log(newHash);
