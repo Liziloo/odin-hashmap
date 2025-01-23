@@ -40,13 +40,23 @@ class HashMap {
         }
         return requestedList.find(key);
     }
+
+    has(key) {
+        const hash = this.hash(key);
+        const requestedList = this.buckets[hash - 1];
+        if (!requestedList) {
+            return null;
+        }
+        return requestedList.contains(key);
+    }
 }
 
 const newHash = new HashMap();
+newHash.loadFactor = 0.75;
 
 newHash.set('me', 'girl');
 newHash.set('Hans', 'boy')
 
-console.log(newHash.get('aha'));
+console.log(newHash.has('cat'));
 
 console.log(newHash);
