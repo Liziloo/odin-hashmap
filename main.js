@@ -61,7 +61,7 @@ class HashMap {
         const hashValue = this.hash(key);
         const requestedList = this.buckets[hashValue - 1];
         if (!requestedList) {
-            return null;
+            return false;
         }
         return requestedList.contains(key);
     }
@@ -138,17 +138,15 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
-console.log(test.length());
-console.log(test.capacity);
 
 test.set('grape', 'green')
 test.set('banana', 'brown')
 test.set('elephant', 'rainbow')
 
-console.log(test.length());
-console.log(test.capacity);
 
 test.set('moon', 'silver')
 
-console.log(test.length());
-console.log(test.capacity);
+test.set('moon', 'yellow');
+test.set('kite', 'aqua');
+
+console.log(test.has('cheese'));
