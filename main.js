@@ -1,4 +1,4 @@
-import { LinkedList } from "./linkedList";
+import { LinkedList } from "./linkedList.js";
 
 class HashMap {
     constructor() {
@@ -19,7 +19,7 @@ class HashMap {
     }
 
     set(key, value) {
-        const hash = hash(key);
+        const hash = this.hash(key);
         if (!this.buckets[hash]) {
             const newLinkedList = new LinkedList();
             this.buckets[hash] = newLinkedList;
