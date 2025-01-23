@@ -57,6 +57,16 @@ class HashMap {
             return requestedList.remove(key);
         }
     }
+
+    length() {
+        let counter = 0;
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                counter += this.buckets[i].size();
+            }
+        }
+        return counter;
+    }
 }
 
 const newHash = new HashMap();
@@ -66,6 +76,6 @@ newHash.set('me', 'girl');
 newHash.set('Hans', 'boy');
 newHash.set('Oak', 'boy');
 
-console.log(newHash.remove('Hans'));
+console.log(newHash.length());
 
 console.log(newHash);
