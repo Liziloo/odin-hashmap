@@ -114,19 +114,24 @@ class LinkedList {
         toPrecede.nextNode = newNode;
     }
 
-    removeAt(index) {
+    remove(key) {
         let pointer = this.head;
-        if (index === 0) {
+        if (this.head.key === key) {
             this.head = pointer.nextNode;
-        } else {
-            let toPrecede;
-            for (let i = 0; i < index; i++) {
-                if (i === index - 1) {
-                    toPrecede = pointer;
-                }
-                pointer = pointer.nextNode;
+            if (!this.head) {
+                this.tail = null;
             }
-            toPrecede.nextNode = pointer.nextNode;
+            return true;
+        } else {
+            while (pointer.nextNode) {
+                let previousNode = pointer;
+                pointer = pointer.nextNode;
+                if (pointer.key === key) {
+                    previousNode.nextNode = pointer.nextNode;
+                    return true;
+                }
+            }
+            return false;
         }   
     }
 }

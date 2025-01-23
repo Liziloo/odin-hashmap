@@ -19,22 +19,22 @@ class HashMap {
     }
 
     set(key, value) {
-        const hash = this.hash(key);
-        console.log('hash', hash);
-        if (hash < 0 || hash >= this.capacity) {
+        const hashValue = this.hash(key);
+        console.log('hash', hashValue);
+        if (hashValue < 0 || hashValue >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
           }
           
-        if (!this.buckets[hash - 1]) {
+        if (!this.buckets[hashValue - 1]) {
             const newLinkedList = new LinkedList();
-            this.buckets[hash - 1] = newLinkedList;
+            this.buckets[hashValue - 1] = newLinkedList;
         }
-        this.buckets[hash - 1].append(key, value);
+        this.buckets[hashValue - 1].append(key, value);
     }
 
     get(key) {
-        const hash = this.hash(key);
-        const requestedList = this.buckets[hash - 1];
+        const hashValue = this.hash(key);
+        const requestedList = this.buckets[hashValue - 1];
         if (!requestedList) {
             return null
         }
@@ -42,12 +42,20 @@ class HashMap {
     }
 
     has(key) {
-        const hash = this.hash(key);
-        const requestedList = this.buckets[hash - 1];
+        const hashValue = this.hash(key);
+        const requestedList = this.buckets[hashValue - 1];
         if (!requestedList) {
             return null;
         }
         return requestedList.contains(key);
+    }
+
+    remove(key) {
+        const hashValue = this.hash(key);
+        const requestedList = this.buckets[hashValue - 1];
+        if (requestedList) {
+            return requestedList.remove(key);
+        }
     }
 }
 
@@ -55,8 +63,9 @@ const newHash = new HashMap();
 newHash.loadFactor = 0.75;
 
 newHash.set('me', 'girl');
-newHash.set('Hans', 'boy')
+newHash.set('Hans', 'boy');
+newHash.set('Oak', 'boy');
 
-console.log(newHash.has('cat'));
+console.log(newHash.remove('Hans'));
 
 console.log(newHash);
