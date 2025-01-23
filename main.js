@@ -28,7 +28,7 @@ class HashMap {
     }
 
     set(key, value) {
-        if (this.length() + 1 > this.loadFactor * this.capacity) {
+        if (this.length() > this.loadFactor * this.capacity) {
             this.resize();
         }
         const hashValue = this.hash(key);
@@ -135,5 +135,12 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
+console.log(test.length());
+console.log(test.capacity);
 
-console.log(test.entries());
+test.set('grape', 'green')
+test.set('banana', 'brown')
+test.set('elephant', 'rainbow')
+
+console.log(test.length());
+console.log(test.capacity);
