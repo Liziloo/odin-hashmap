@@ -156,6 +156,23 @@ class LinkedList {
             return false;
         }   
     }
+
+    changeValue(key, value) {
+        if (!this.head) {return false};
+        let pointer = this.head;
+        if (pointer.key === key) {
+            pointer.value = value;
+            return true;
+        }
+        while (pointer.nextNode) {
+            pointer = pointer.nextNode;
+            if (pointer.key  === key) {
+                pointer.value = value;
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 class Node {

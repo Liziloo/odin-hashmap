@@ -18,17 +18,31 @@ class HashMap {
         return hashCode;
     }
 
+    resize() {
+        const existingEntries = this.entries();
+        this.capacity = this.capacity * 2;
+        this.clear();
+        for (let entry of existingEntries) {
+            this.set(entry[0], entry[1]);
+        }
+    }
+
     set(key, value) {
+        if (this.length() + 1 > this.loadFactor * this.capacity) {
+            this.resize();
+        }
         const hashValue = this.hash(key);
         if (hashValue < 0 || hashValue >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
           }
-          
         if (!this.buckets[hashValue - 1]) {
             const newLinkedList = new LinkedList();
-            this.buckets[hashValue - 1] = newLinkedList;
+            this.buckets[hashValue -1] = newLinkedList;
         }
-        this.buckets[hashValue - 1].append(key, value);
+        const requestedList = this.buckets[hashValue - 1];
+        if (!requestedList.changeValue(key, value)) {
+            requestedList.append(key, value);
+        }
     }
 
     get(key) {
@@ -105,13 +119,21 @@ class HashMap {
     }
 }
 
-const newHash = new HashMap();
-newHash.loadFactor = 0.75;
+const test = new HashMap();
+test.loadFactor = 0.75;
 
-newHash.set('me', 'girl');
-newHash.set('Hans', 'boy');
-newHash.set('Oak', 'boy');
-newHash.set('Finnick', 'boy');
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
 
 
-console.log(newHash.entries());
+console.log(test.entries());
