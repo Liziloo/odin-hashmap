@@ -28,21 +28,24 @@ class HashMap {
     }
 
     set(key, value) {
-        if (this.length() > this.loadFactor * this.capacity) {
+        const hashValue = this.hash(key);
+        const requestedList = this.buckets[hashValue - 1];
+        if (requestedList && requestedList.contains(key)) {
+            requestedList.changeValue(key, value);
+            return
+        }
+        if (this.length() + 1 > this.loadFactor * this.capacity) {
             this.resize();
         }
-        const hashValue = this.hash(key);
-        if (hashValue < 0 || hashValue >= this.capacity) {
+        const newHashValue = this.hash(key);
+        if (newHashValue < 0 || newHashValue >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
           }
-        if (!this.buckets[hashValue - 1]) {
+        if (!this.buckets[newHashValue - 1]) {
             const newLinkedList = new LinkedList();
-            this.buckets[hashValue -1] = newLinkedList;
+            this.buckets[newHashValue - 1] = newLinkedList;
         }
-        const requestedList = this.buckets[hashValue - 1];
-        if (!requestedList.changeValue(key, value)) {
-            requestedList.append(key, value);
-        }
+        this.buckets[newHashValue - 1].append(key, value);
     }
 
     get(key) {
@@ -141,6 +144,11 @@ console.log(test.capacity);
 test.set('grape', 'green')
 test.set('banana', 'brown')
 test.set('elephant', 'rainbow')
+
+console.log(test.length());
+console.log(test.capacity);
+
+test.set('moon', 'silver')
 
 console.log(test.length());
 console.log(test.capacity);
