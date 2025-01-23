@@ -12,7 +12,7 @@ class HashMap {
 
         const primeNumber = 31;
         for (let i = 0; i < key.length; i++) {
-            hashCode = (primeNumber * hashCode + key.charCodeAt(i) % this.capacity);
+            hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
         }
 
         return hashCode;
@@ -30,6 +30,7 @@ class HashMap {
 
 const newHash = new HashMap();
 
-newHash.set({'me': 'girl'});
+newHash.set('me', 'girl');
+newHash.set('Hans', 'boy')
 
 console.log(newHash);
