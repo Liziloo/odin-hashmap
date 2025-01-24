@@ -18,18 +18,6 @@ class LinkedList {
         this.tail = newNode;
     }
 
-    prepend(key, value) {
-        const newNode = new Node();
-        newNode.key = key;
-        newNode.value = value;
-        if (this.head) {
-            newNode.nextNode = this.head;
-        } else {
-            this.tail = newNode;
-        }
-        this.head = newNode;
-    }
-
     size() {
         let counter = 0;
         if (this.head) {
@@ -41,23 +29,6 @@ class LinkedList {
             }
         }
         return counter;
-    }
-
-    at(index) {
-        let pointer = this.head;
-        for (let i = 0; i < index; i++) {
-            pointer = pointer.nextNode;
-        }
-        return pointer;
-    }
-
-    pop() {
-        let pointer = this.head;
-        while (pointer.nextNode !== this.tail) {
-            pointer = pointer.nextNode;
-        }
-        pointer.nextNode = null;
-        this.tail = pointer;
     }
 
     contains(key) {
@@ -115,26 +86,6 @@ class LinkedList {
             theseEntries.push([pointer.key, pointer.value]);
         }
         return theseEntries;
-    }
-
-    insertAt(key, value, index) {
-        if (index === 0) {
-            this.prepend(key, value);
-            return
-        }
-        const newNode = new Node();
-        newNode.key = key;
-        newNode.value = value;
-        let pointer = this.head;
-        let toPrecede;
-        for (let i = 0; i < index; i++) {
-            if (i === index - 1) {
-                toPrecede = pointer;
-            }
-            pointer = pointer.nextNode;
-        }
-        newNode.nextNode = pointer;
-        toPrecede.nextNode = newNode;
     }
 
     remove(key) {
